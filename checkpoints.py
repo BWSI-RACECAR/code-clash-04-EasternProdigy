@@ -31,14 +31,15 @@ Input: [5, 0, 3, 6] ; Output: 3
 class Solution:    
     def longestdistance(self, checkpoints):
             checkpoint_dist = 0
-            for i in range(checkpoints):
-                 if i > 0:
-                    right_check = checkpoints[i] - checkpoints[i-1]
-                    left_check = checkpoints[i-1] - checkpoints[i]
-                    if (right_check) > (left_check) and (right_check) > checkpoint_dist:
-                      checkpoint_dist = right_check
-                    elif (left_check) > (right_check) and (left_check) > checkpoint_dist:
-                        checkpoint_dist = left_check
+            for i in range(0, len(checkpoints)):
+                 for j in range(0, len(checkpoints)):
+                      if checkpoints[j] > checkpoints[j+1]:
+                           temp = checkpoints[j]
+                           checkpoints[j] = checkpoints[j+1]
+                           checkpoints[j+1] = temp
+            for i in range(len(checkpoints) - 1):
+                 if (checkpoints[i] - checkpoints[i-1]) > checkpoint_dist:
+                      checkpoint_dist = checkpoints[i] - checkpoints[i-1]
             return checkpoint_dist
 
 def main():
