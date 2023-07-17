@@ -33,10 +33,12 @@ class Solution:
             checkpoint_dist = 0
             for i in range(checkpoints):
                  if i > 0:
-                    if (checkpoints[i] - checkpoints[i-1]) > (checkpoints[i-1] - checkpoints[i]) and (checkpoints[i] - checkpoints[i-1]) > checkpoint_dist:
-                      checkpoint_dist = checkpoints[i] - checkpoints[i-1]
-                    elif (checkpoints[i-1] - checkpoints[i]) > (checkpoints[i] - checkpoints[i-1]) and (checkpoints[i-1] - checkpoints[i]) > checkpoint_dist:
-                        checkpoint_dist = checkpoints[i-1] - checkpoints[i]
+                    right_check = checkpoints[i] - checkpoints[i-1]
+                    left_check = checkpoints[i-1] - checkpoints[i]
+                    if (right_check) > (left_check) and (right_check) > checkpoint_dist:
+                      checkpoint_dist = right_check
+                    elif (left_check) > (right_check) and (left_check) > checkpoint_dist:
+                        checkpoint_dist = left_check
             return checkpoint_dist
 
 def main():
