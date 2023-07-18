@@ -30,17 +30,17 @@ Input: [5, 0, 3, 6] ; Output: 3
 
 class Solution:    
     def longestdistance(self, checkpoints):
-            checkpoint_dist = 0
-            for i in range(0, len(checkpoints)):
-                 for j in range(0, len(checkpoints)):
-                      if checkpoints[j] > checkpoints[j+1]:
-                           temp = checkpoints[j]
-                           checkpoints[j] = checkpoints[j+1]
-                           checkpoints[j+1] = temp
-            for i in range(len(checkpoints) - 1):
-                 if (checkpoints[i] - checkpoints[i-1]) > checkpoint_dist:
-                      checkpoint_dist = checkpoints[i] - checkpoints[i-1]
-            return checkpoint_dist
+        max_distance = 0
+        for i in range(len(checkpoints)):
+            for j in range((len(checkpoints) - i) - 1):
+                if checkpoints[j] > checkpoints[j + 1]:
+                    checkpoints[j] =  checkpoints[j + 1] 
+                    checkpoints[j+1] = checkpoints[j]
+        for i in range(1, len(checkpoints)):
+            if checkpoints[i] - checkpoints[i - 1] > max_distance:
+                max_distance = checkpoints[i] - checkpoints[i - 1]
+
+        return max_distance
 
 def main():
     array = input().split(" ")
